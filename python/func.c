@@ -164,19 +164,24 @@ void moveForward( uint8_t r, uint8_t c ){
  */
 void generateDot ( void ){
  
-	uint8_t found = 1;											/* Assume found */
+	uint8_t overlap;										
 	
 	do{
  
+		overlap = 0;											/* Assume Not Found */
+		
 		rdot = (uint8_t) ( rand() % 8 );						/* Generate random points */
 		cdot = (uint8_t) ( rand() % 8 );
 	
 		for( uint8_t i = 0; i < snakeSize; i++ ){
   
-			if( ( rdot == snakeRow[i] ) && ( cdot == snakeCol[i] ) )
-				found = 0;										/* Retry if point on snake body */   
+			if( ( rdot == snakeRow[i] ) && ( cdot == snakeCol[i] ) ){
+				overlap = 1;
+				break;
+			}															   
 		} 
-	} while( !found );
+		
+	} while( overlap );
 }
 
 /************************************************************************
@@ -287,14 +292,9 @@ void ShowScroll ( void ){
 
 	for( uint8_t i = 0; i < 8; i++ ){							/* Display Sweep */
     
-		PORT_ROW = 0x00;
-		PORT_ROW |= ( 1<<i );
-		
-		_delay_ms( SWEEP_TIME );
-      
-		PORT_COL = 0x00;
+		PORT_ROW = ( 1<<i );
 		PORT_COL = store[i];
-		
+		_delay_ms( SWEEP_TIME );
 	}  
 }
 

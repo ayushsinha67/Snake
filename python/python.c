@@ -27,14 +27,14 @@ volatile uint16_t counter4 = 0;
 uint16_t compare;
 
 /* Game Variables */
-uint8_t rdot = 0, cdot = 0;								/* Dot location */
-uint8_t nextc = 0, nextr = 0;							/* Next step location */
-uint16_t snakeSize = 3;									/* Snake Size */
+uint8_t rdot, cdot;										/* Dot location */
+uint8_t nextc, nextr;									/* Next step location */
+uint16_t snakeSize;										/* Snake Size */
 uint8_t snakeRow[64], snakeCol[64];						/* Store Snake */									
-uint8_t direction = RIGHT;								/* direction of movement */
-uint8_t store[8];						
+uint8_t direction = RIGHT;								/* direction of movement */						
 
 /* GAME OVER */
+uint8_t store[8];
 const uint8_t letter[10][8] PROGMEM =	{{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
 										{ 0x00, 0x3c, 0x20, 0x20, 0x2c, 0x24, 0x3c, 0x00}, 
 										{ 0x00, 0x3c, 0x24, 0x24, 0x3c, 0x24, 0x24, 0x00},
@@ -62,8 +62,6 @@ void main()
 	DDR_COL = 0xFF;										/* Column */
 	DDR_SEL	= 0x00;										/* Buttons */
   
-	PORT_ROW = 0xFF;
-	PORT_COL = 0xFF;
 	PORT_SEL = 0xFF;									/* Pull Up */
 	
 	/* Initialize Timer : CTC mode, PS = 64, TOP = OCR1A, 1ms, 16 Mhz*/  

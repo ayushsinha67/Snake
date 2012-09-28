@@ -36,7 +36,7 @@
 /* Timer - in ms */
 #define SNAKE_MOV_TIME	400		
 #define SWEEP_TIME		1					
-#define SCROLL_TIME		100
+#define SCROLL_TIME		50
 #define SEL_WAIT		200
 
 /* Choose Game Mode 
